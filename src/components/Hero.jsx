@@ -2,6 +2,10 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiDownload } from 'react-icons/fi';
 
+import profileImg from '../assets/img3.jpg';
+import resumeFile from '../assets/resume.pdf';
+
+
 const Hero = ({ isMobile }) => {
   const [typedText, setTypedText] = useState('');
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -17,31 +21,14 @@ const Hero = ({ isMobile }) => {
 
   // Function to handle resume download
   const downloadResume = () => {
-    // Using the Fetch API to get the resume file
-    fetch('/src/assets/resume.pdf')
-      .then(response => response.blob())
-      .then(blob => {
-        // Create a blob link to download
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'Priyanka_Gaikwad_Resume.pdf');
-        
-        // Append to html link element page
-        document.body.appendChild(link);
-        
-        // Start download
-        link.click();
-        
-        // Clean up and remove the link
-        link.parentNode.removeChild(link);
-      })
-      .catch(error => {
-        console.error('Error downloading resume:', error);
-        // Fallback: Open in new tab if download fails
-        window.open('/src/assets/resume.pdf', '_blank');
-      });
-  };
+  const link = document.createElement('a');
+  link.href = resumeFile; // use imported file
+  link.setAttribute('download', 'Priyanka_Gaikwad_Resume.pdf');
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+};
+
 
   useEffect(() => {
     // Typewriter effect for name
@@ -222,7 +209,7 @@ const Hero = ({ isMobile }) => {
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-pulse blur-xl opacity-30" />
             <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl shadow-cyan-400/20">
               <img
-                src="../assets/img3.jpg"
+                src={profileImg}
                 alt="Priyanka Gaikwad"
                 className="w-full h-full object-cover"
               />

@@ -1,12 +1,17 @@
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 
+import askItImg from '../assets/askit_project.png';
+import farmersImg from '../assets/farmers_website.png';
+import bonafideImg from '../assets/bonafide_system.png';
+import patientImg from '../assets/patient_m.png';
+
 const projects = [
   {
     title: "AskIt – Discover Incredible India",
     description: "An interactive travel platform where users can search cities and famous places in India, view detailed information (history, best time to visit, fun facts, tips), and add new locations.",
     tags: ["React", "Django", "Tailwind CSS", "Vite"],
-    image: "../assets/askit_project.png", // You'll need to add this image
+    image: askItImg,
     github: "https://github.com/your-username/askit", // Update with your actual GitHub URL
     live: "https://askit-nine.vercel.app/"
   },
@@ -14,7 +19,7 @@ const projects = [
     title: "Farmer's Market Web App",
     description: "A dynamic PHP-based platform where farmers can register, upload produce, and manage listings. Buyers can browse categories and place order requests.",
     tags: ["PHP", "MySQL", "JavaScript"],
-    image: "../assets/farmers_website.png",
+    image: farmersImg,
     github: "https://github.com/Priyankagaikwad2004/farmers-market",
     live: "#"
   },
@@ -22,7 +27,7 @@ const projects = [
     title: "Bonafide Certificate System",
     description: "Automated system for generating bonafide and leaving certificates with multi-role login and integrated clearance process.",
     tags: ["PHP", "MySQL", "Bootstrap"],
-    image: "../assets/bonafide_system.png",
+    image: bonafideImg,
     github: "https://github.com/Priyankagaikwad2004/bonafide-system",
     live: "#"
   },
@@ -30,7 +35,7 @@ const projects = [
     title: "Patient Management System",
     description: "Lightweight hospital management system to manage patient records, doctor assignments, and visit logs.",
     tags: ["PHP", "MySQL", "jQuery"],
-    image: "../assets/patient_m.png",
+    image: patientImg,
     github: "https://github.com/Priyankagaikwad2004/patient-management",
     live: "#"
   },
