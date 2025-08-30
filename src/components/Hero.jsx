@@ -222,7 +222,7 @@ const Hero = ({ isMobile }) => {
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-pulse blur-xl opacity-30" />
             <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl shadow-cyan-400/20">
               <img
-                src="/src/assets/img3.jpg"
+                src="../assets/img3.jpg"
                 alt="Priyanka Gaikwad"
                 className="w-full h-full object-cover"
               />
