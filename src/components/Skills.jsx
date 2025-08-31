@@ -1,9 +1,4 @@
 import { motion } from 'framer-motion';
-import { 
-  FaHtml5, FaCss3Alt, FaJs, FaReact, 
-  FaJava, FaDatabase, FaCode, FaGithub 
-} from 'react-icons/fa';
-import { SiDjango, SiTailwindcss, SiMysql, SiPhp, SiCplusplus } from 'react-icons/si';
 
 const Skills = () => {
   const skillsData = [
