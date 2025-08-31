@@ -1,37 +1,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi';
-
-// Custom hook to detect mobile screen size
-const useIsMobile = (breakpoint = 768) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < breakpoint);
-    };
-
-    // Initial check
-    checkIsMobile();
-
-    // Add event listener for window resize
-    window.addEventListener('resize', checkIsMobile);
-
-    // Cleanup
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, [breakpoint]);
-
-  return isMobile;
-};
+import { Menu, X } from 'lucide-react';
 
 const Header = () => {
-  const isMobile = useIsMobile(); // Using custom hook instead of prop
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -39,113 +16,125 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Certificates', href: '#certificates' },
+    { label: 'Contact', href: '#contact' },
   ];
 
-  // Close menu when clicking on a link
-  const handleNavClick = () => {
-    if (isMobile) {
-      setIsMenuOpen(false);
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+
+      // Delay closing mobile menu to let scroll finish
+      setTimeout(() => {
+        setIsMenuOpen(false);
+      }, 400);
     }
   };
 
   return (
-    <header 
-      className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${
-        scrolled 
-          ? 'bg-gray-900/95 backdrop-blur-md py-2 shadow-lg' 
-          : 'py-4 bg-gray-900/80'
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'backdrop-blur-lg bg-gray-900/80 shadow-lg' : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
           <motion.a
             href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('#home');
+            }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500"
-            onClick={handleNavClick}
+            className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
           >
             Priyanka Gaikwad
           </motion.a>
 
           {/* Desktop Navigation */}
-          {!isMobile && (
-            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.5 }}
-                  className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 relative group text-sm lg:text-base"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full" />
-                </motion.a>
-              ))}
-            </nav>
-          )}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item, index) => (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.href);
+                }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * index, duration: 0.5 }}
+                className="text-gray-300 hover:text-white transition-colors duration-300 relative group"
+              >
+                {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+              </motion.a>
+            ))}
+            <button
+              onClick={() => scrollToSection('#contact')}
+              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg text-sm hover:from-purple-700 hover:to-blue-700 transition-colors"
+            >
+              Let's Talk
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
-          {isMobile && (
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-cyan-400 focus:outline-none z-50 p-2"
-              aria-label="Toggle menu"
-              aria-expanded={isMenuOpen}
-            >
-              {isMenuOpen ? (
-                <FiX className="w-6 h-6" />
-              ) : (
-                <FiMenu className="w-6 h-6" />
-              )}
-            </button>
-          )}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-gray-300 hover:text-white transition-colors duration-300"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
-
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {isMobile && isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-gray-900/95 backdrop-blur-md z-40 mt-16"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <motion.nav 
-                className="flex flex-col items-center justify-center h-full gap-8"
-                initial={{ y: -20 }}
-                animate={{ y: 0 }}
-                exit={{ y: -20 }}
-              >
-                {navItems.map((item, index) => (
-                  <motion.a
-                    key={item.name}
-                    href={item.href}
-                    onClick={handleNavClick}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index, duration: 0.3 }}
-                    className="text-2xl text-gray-300 hover:text-cyan-400 transition-colors duration-300 py-2"
-                  >
-                    {item.name}
-                  </motion.a>
-                ))}
-              </motion.nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-    </header>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-gray-800/95 backdrop-blur-md mx-4 mt-2 p-4 border border-gray-700 rounded-lg overflow-hidden"
+          >
+            <div className="flex flex-col space-y-4">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.href);
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.3 }}
+                  className="text-gray-300 hover:text-white transition-colors duration-300 py-2"
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+              <button
+                onClick={() => scrollToSection('#contact')}
+                className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg text-sm hover:from-purple-700 hover:to-blue-700 transition-colors mt-4"
+              >
+                Let's Talk
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

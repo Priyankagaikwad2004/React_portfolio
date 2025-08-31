@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiDownload } from 'react-icons/fi';
 
-import profileImg from '../assets/img3.jpg';
 import resumeFile from '../assets/resume.pdf';
 
 
@@ -196,27 +195,6 @@ const Hero = ({ isMobile }) => {
           )}
         </motion.div>
       </div>
-
-      {/* Floating profile image - Hidden on mobile */}
-      {!isMobile && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="hidden lg:block absolute right-20 bottom-20"
-        >
-          <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-pulse blur-xl opacity-30" />
-            <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl shadow-cyan-400/20">
-              <img
-                src={profileImg}
-                alt="Priyanka Gaikwad"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </motion.div>
-      )}
     </section>
   );
 };

@@ -9,6 +9,8 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingParticles from './components/FloatingParticles';
+import Certificates from './components/Certificate';
+import Experience from './components/Experience';
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -40,8 +42,10 @@ const App = () => {
         <Header isMobile={isMobile} />
         <Hero isMobile={isMobile} />
         <About />
-        <Skills />
         <Projects isMobile={isMobile} />
+        <Experience />
+        <Skills />
+        <Certificates />
         <Contact />
         <Footer />
       </div>

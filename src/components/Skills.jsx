@@ -20,13 +20,6 @@ const Skills = () => {
     ]
   },
   {
-    category: "Database Management",
-    skills: [
-      { name: "MySQL", percentage: 85 },
-      { name: "PostgreSQL", percentage: 75 }
-    ]
-  },
-  {
     category: "Programming Languages",
     skills: [
       { name: "C++", percentage: 80 },
@@ -34,7 +27,31 @@ const Skills = () => {
       { name: "Python", percentage: 85 },
       { name: "JavaScript", percentage: 80 }
     ]
-  }
+  },
+  {
+      title: "Mobile & Responsive",
+      skills: [
+        { name: "Responsive Design", percentage: 92 },
+        { name: "Mobile-First Approach", percentage: 88 },
+        { name: "Progressive Web Apps", percentage: 75 },
+        { name: "Cross-Browser Testing", percentage: 80 }
+      ],
+    },
+    {
+    category: "Database Management",
+    skills: [
+      { name: "MySQL", percentage: 85 },
+      { name: "PostgreSQL", percentage: 75 }
+    ]
+  },
+  {
+      title: "Tools & Technologies",
+      skills: [
+        { name: "Git & Version Control", percentage: 85 },
+        { name: "VS Code & IDEs", percentage: 90 },
+      ],
+      gradient: "from-secondary to-primary"
+    }
 ];
 
 
