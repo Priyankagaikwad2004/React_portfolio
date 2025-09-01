@@ -10,7 +10,7 @@ const Projects = () => {
       technologies: ["React", "Django", "Tailwind CSS", "Vite"],
       features: ["City Search", "Place Discovery", "Travel Information", "User Contributions"],
       gradient: "from-purple-500 to-blue-500",
-      github: "https://github.com/your-username/askit",
+      github: "https://github.com/Priyankagaikwad2004/Askit",
       live: "https://askit-nine.vercel.app/"
     },
     {
@@ -21,7 +21,7 @@ const Projects = () => {
       features: ["Patient Records", "Doctor Management", "Appointment System", "Visit Logs"],
       gradient: "from-purple-500 to-pink-500",
       github: "https://github.com/Priyankagaikwad2004/patient-management",
-      live: "#"
+      live: "https://patientmanagement.free.nf/"
     },
     {
       title: "Farmer's Market Web App",
